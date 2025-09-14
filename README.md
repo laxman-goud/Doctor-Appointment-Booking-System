@@ -1,1 +1,1 @@
-# Doctor-Appointment-Booking-System
+# MediBook - Doctor Appointment Booking System
