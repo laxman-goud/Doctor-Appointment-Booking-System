@@ -4,14 +4,16 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { AdminContext } from './context/AdminContext.jsx'
 import { useContext } from 'react'
+import Navbar from './components/Navbar.jsx'
 
 const App = () => {
 
   const {aToken} = useContext(AdminContext);
 
   return aToken ? (
-    <div>
+    <div className='bg-[#F8F9FD]'>
       <ToastContainer />
+      <Navbar />
     </div>
   ) : (
     <>
