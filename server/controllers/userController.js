@@ -9,13 +9,13 @@ const registerUser = async (req, res) => {
         const {name, email, password} = req.body;
         
         if (!name || !email || !password) {
-            return res.status(400).json({ message: "Please fill all the fields.", success: false });
+            return res.status(200).json({ message: "Please fill all the fields.", success: false });
         }
         if (!validator.isEmail(email)) {
-            return res.status(400).json({ message: "Please enter a valid email.", success: false })
+            return res.status(200).json({ message: "Please enter a valid email.", success: false })
         }
         if (password.length < 8) {
-            return res.status(400).json({ message: "Password must be at least 8 characters long.", success: false })
+            return res.status(200).json({ message: "Password must be at least 8 characters long.", success: false })
         }
 
         // Hashing the password
@@ -51,20 +51,20 @@ const loginUser = async (req, res) => {
         const {email, password} = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({ message: "Please fill all the fields.", success: false });
+            return res.status(200).json({ message: "Please fill all the fields.", success: false });
         }
         if (!validator.isEmail(email)) {
-            return res.status(400).json({ message: "Please enter a valid email.", success: false })
+            return res.status(200).json({ message: "Please enter a valid email.", success: false })
         }
 
         const user = await userModel.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "User not found.", success: false })
+            return res.status(200).json({ message: "User not found.", success: false })
         }
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect) {
-            return res.status(400).json({ message: "Incorrect password.", success: false })
+            return res.status(200).json({ message: "Incorrect password.", success: false })
         }
 
         const token = jwt.sign(
