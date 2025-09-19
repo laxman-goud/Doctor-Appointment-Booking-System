@@ -14,4 +14,13 @@ const changeAvailability = async (req, res) => {
     }
 }
 
-export {changeAvailability}; 
+const doctorList = async (req, res) => {
+    try {
+        const doctors = await doctorModel.find({}).select(['-password', '-email']);
+        res.json({ doctors, success: true });
+    } catch (error) {
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+export {changeAvailability, doctorList}; 
