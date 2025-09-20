@@ -16,7 +16,6 @@ const MyAppointments = () => {
         const dateArray = slotDate.split('-')
         return dateArray[0] + ' ' + months[Number(dateArray[1])] + ' ' + dateArray[2]
     }
-
     const getUserAppointments = async () => {
         try {
             const {data} = await axios.get(`${backendUrl}/api/user/appointments`, { headers: { token } })
