@@ -203,4 +203,31 @@ const listAppointments = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointments };
+// API to cancel appointment
+const cancelAppointment = async (req, res) => {
+    try {
+        const { appointmentId } = req.body;
+        const userId = req.userId;
+
+        const appointmentData = await appointmentModel.findById(appointmentId);
+        if (appointmentData.userId !== userId) {
+            return res.status(200).json({ message: "Appointment not found", success: false });
+        }
+
+        await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled: true} );
+
+        const { docId, slotDate, slotTime } = appointmentData;
+        const doctorData = await doctorModel.findById(docId).select('-password');
+        let slots_booked = doctorData.slots_booked;
+
+        slots_booked[slotDate] = slots_booked[slotDate].filter(slot => slot !== slotTime);
+        await doctorModel.findByIdAndUpdate(docId, {slots_booked});
+
+        res.json({ message: "Appointment cancelled successfully", success: true });
+    } catch (error) {
+        console.log(error);
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+export { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointments, cancelAppointment };
