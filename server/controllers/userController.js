@@ -191,4 +191,16 @@ const bookAppointment = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, getProfile, updateProfile, bookAppointment };
+// API to get user appointments for client
+const listAppointments = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const appointments = await appointmentModel.find({ userId }); 
+
+        res.json({ appointments, success: true });
+    } catch (error) {
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+export { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointments };
