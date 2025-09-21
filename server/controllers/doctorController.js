@@ -1,4 +1,6 @@
 import doctorModel from '../models/doctorModel.js';
+import bycrpt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const changeAvailability = async (req, res) => {
     try {
@@ -23,4 +25,28 @@ const doctorList = async (req, res) => {
     }
 }
 
-export {changeAvailability, doctorList}; 
+const loginDoctor = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const doctor = await doctorModel.findOne({ email });
+
+        if (!doctor) {
+            return res.status(200).json({ message: "Doctor not found.", success: false });
+        }
+        const isMatch = await bycrpt.compare(password, doctor.password);
+        if (!isMatch) {
+            return res.status(200).json({ message: "Incorrect password.", success: false });
+        }
+
+        const token = jwt.sign(
+            { id: doctor._id },
+            process.env.JWT_SECRET
+        );
+        res.json({ message: "Login successful.", success: true, token });
+
+    } catch (error) {
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+export {changeAvailability, doctorList, loginDoctor}; 
