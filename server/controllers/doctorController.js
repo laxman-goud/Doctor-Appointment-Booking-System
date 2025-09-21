@@ -137,4 +137,30 @@ const doctorDashboard = async (req, res) => {
     }
 }
 
-export {changeAvailability, doctorList, loginDoctor, appointmentsDoctor, appointmentCancel, appointmentComplete, doctorDashboard}; 
+// API to get doctor profile
+const getDoctorProfile = async (req, res) => {
+    try {
+        const docId = req.docId;
+        const profileData = await doctorModel.findById(docId).select('-password');
+
+        res.json({ profileData, success: true });
+    } catch (error) {
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+// API to update doctor profile
+const updateDoctorProfile = async (req, res) => {
+    try {
+        const { address, fees, available } = req.body;
+        const docId = req.docId;
+
+        await doctorModel.findByIdAndUpdate(docId, {fees, available, address});
+
+        res.json({ message: "Profile updated successfully.", success: true });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error.", success: false });
+    }
+};
+
+export {changeAvailability, doctorList, loginDoctor, appointmentsDoctor, appointmentCancel, appointmentComplete, doctorDashboard, getDoctorProfile, updateDoctorProfile}; 
