@@ -62,4 +62,46 @@ const appointmentsDoctor = async (req, res) => {
     }
 }
 
-export {changeAvailability, doctorList, loginDoctor, appointmentsDoctor}; 
+// API to mark an appointment as completed
+const appointmentComplete = async (req, res) => {
+    try {
+        const { appointmentId } = req.body;
+        const docId = req.docId;
+
+        const appointmentData = await appointmentModel.findById(appointmentId);
+
+        if (appointmentData  && appointmentData.docId === docId) {
+            await appointmentModel.findByIdAndUpdate(appointmentId, { isCompleted: true });
+            return res.json({ message: "Appointment completed successfully.", success: true });
+        }
+        else {
+            return res.json({ message: "Appointment not found.", success: false });
+        }
+
+    } catch (error) {
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+// API to mark an appointment as cancel
+const appointmentCancel = async (req, res) => {
+    try {
+        const { appointmentId } = req.body;
+        const docId = req.docId;
+
+        const appointmentData = await appointmentModel.findById(appointmentId);
+
+        if (appointmentData  && appointmentData.docId === docId) {
+            await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
+            return res.json({ message: "Appointment cancelled successfully.", success: true });
+        }
+        else {
+            return res.json({ message: "Appointment not found.", success: false });
+        }
+
+    } catch (error) {
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+export {changeAvailability, doctorList, loginDoctor, appointmentsDoctor, appointmentCancel, appointmentComplete}; 
