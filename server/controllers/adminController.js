@@ -106,5 +106,27 @@ const appointmentsAdmin = async (req, res) => {
     }
 }
 
+// API to cancel an appointment
+const appointmentCancel = async (req, res) => {
+    try {
+        const { appointmentId } = req.body;
+        const appointmentData = await appointmentModel.findById(appointmentId);
+        
 
-export { addDoctor, adminLogin, allDoctors, appointmentsAdmin };
+        await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
+
+        const { docId, slotDate, slotTime } = appointmentData; 
+        const doctorData = await doctorModel.findById(docId).select('-password');
+        let slots_booked = doctorData.slots_booked;
+
+        slots_booked[slotDate] = slots_booked[slotDate].filter(slot => slot !== slotTime);
+        await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+
+        res.json({ message: "Appointment cancelled successfully", success: true });
+    } catch (error) {
+        console.log(error);
+        res.json({ message: "Internal server error.", success: false });
+    }
+}
+
+export { addDoctor, adminLogin, allDoctors, appointmentsAdmin, appointmentCancel };
