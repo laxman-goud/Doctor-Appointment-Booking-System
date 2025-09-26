@@ -1,4 +1,4 @@
-# MediBook Admin/Doctor Panel
+# MediBook Admin and Doctor Panels
 
 This is the dedicated front-end application for the administrative and doctor panels of the MediBook system. It's built with React and Vite and allows authorized users to manage key aspects of the application.
 
