@@ -81,6 +81,12 @@ To get the project up and running on your local machine, please refer to the ind
    # Start admin panel (from admin directory)
    npm run dev
    ```
+## 🎥 Demo
+
+Check out the live demo of MediBook:
+
+- **Client App (Patient Side)**: [Live Demo](https://medibook-client.vercel.app)
+- **Admin Panel (Doctor & Admin Side)**: [Live Demo](https://medibook-admin.vercel.app)
 
 ## 📄 License
 
