@@ -83,10 +83,21 @@ To get the project up and running on your local machine, please refer to the ind
    ```
 ## 🎥 Demo
 
-Check out the live demo of MediBook:
+Explore the live demos of **MediBook** below:
 
-- **Client App (Patient Side)**: [Live Demo](https://medibook-client.vercel.app)
-- **Admin Panel (Doctor & Admin Side)**: [Live Demo](https://medibook-admin.vercel.app)
+- **🩺 Client App (Patient Side)**  
+  [👉 Live Demo](https://medibook-client.vercel.app)  
+  **Login Credentials:**  
+Email: test@test.in <br>
+Password: testtest
+
+
+
+- **👨‍⚕️ Admin Panel (Doctor & Admin Side)**  
+[👉 Live Demo](https://medibook-admin.vercel.app)  
+**Doctor Login Credentials:**  
+Email: richard.james@medmail.com <br>
+Password: DocRich#123
 
 ## 📄 License
 
