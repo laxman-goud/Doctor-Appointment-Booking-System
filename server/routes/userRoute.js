@@ -1,20 +1,48 @@
-import express from "express";
-import { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointments, cancelAppointment, paymentRazorpay, verifyRazorpay } from "../controllers/userController.js";
-import authUser from "../middlewares/authUser.js";
-import upload from "../middlewares/multer.js";
+// Import dependencies and controllers
+import express from "express"
+import { 
+  registerUser, 
+  loginUser, 
+  getProfile, 
+  updateProfile, 
+  bookAppointment, 
+  listAppointments, 
+  cancelAppointment, 
+  paymentRazorpay, 
+  verifyRazorpay 
+} from "../controllers/userController.js"
+import authUser from "../middlewares/authUser.js"  // Middleware for user authentication
+import upload from "../middlewares/multer.js"      // Middleware for handling profile image uploads
 
-const userRouter = express.Router();
+// Initialize express router
+const userRouter = express.Router()
 
-userRouter.post("/register", registerUser);
-userRouter.post("/login", loginUser);
+// User registration route
+userRouter.post("/register", registerUser)
 
-userRouter.get("/get-profile", authUser, getProfile);
-userRouter.post("/update-profile", upload.single('image'), authUser, updateProfile);
-userRouter.post("/book-appointment", authUser, bookAppointment); 
-userRouter.get("/appointments", authUser, listAppointments);
-userRouter.post("/cancel-appointment", authUser, cancelAppointment);
-userRouter.post("/payment-razorpay", authUser, paymentRazorpay);
-userRouter.post("/verify-razorpay", authUser, verifyRazorpay);
+// User login route
+userRouter.post("/login", loginUser)
 
+// Get logged-in user profile (requires authentication)
+userRouter.get("/get-profile", authUser, getProfile)
 
-export default userRouter;
+// Update user profile with optional image upload (requires authentication)
+userRouter.post("/update-profile", upload.single('image'), authUser, updateProfile)
+
+// Book a new appointment (requires authentication)
+userRouter.post("/book-appointment", authUser, bookAppointment)
+
+// Fetch all user appointments (requires authentication)
+userRouter.get("/appointments", authUser, listAppointments)
+
+// Cancel a booked appointment (requires authentication)
+userRouter.post("/cancel-appointment", authUser, cancelAppointment)
+
+// Initialize Razorpay payment process (requires authentication)
+userRouter.post("/payment-razorpay", authUser, paymentRazorpay)
+
+// Verify Razorpay payment (requires authentication)
+userRouter.post("/verify-razorpay", authUser, verifyRazorpay)
+
+// Export router for main server use
+export default userRouter
