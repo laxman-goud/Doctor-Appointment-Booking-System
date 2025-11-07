@@ -1,21 +1,30 @@
+/* Import Google Font (Outfit family with all weights) */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/* Tailwind CSS base styles, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
+/* Global font applied to all elements */
+* {
     font-family: Outfit;
 }
-.active hr{
-    @apply block
+
+/* Active navigation item underline (visible when active) */
+.active hr {
+    @apply block;
 }
 
-::-webkit-scrollbar{
-    @apply hidden
+/* Hide scrollbar for a cleaner UI */
+::-webkit-scrollbar {
+    @apply hidden;
 }
 
+/* Responsive styles for smaller screens (max width: 740px) */
 @media (max-width: 740px) {
-    .active p{
-        @apply text-white bg-primary
+    /* Highlight active nav text on mobile */
+    .active p {
+        @apply text-white bg-primary;
     }
 }
