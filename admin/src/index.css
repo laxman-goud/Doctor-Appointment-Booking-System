@@ -1,13 +1,17 @@
+/* Importing the 'Outfit' font family from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
+/* Importing Tailwind CSS layers */
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+@tailwind components; 
+@tailwind utilities;  
 
-*{
+/* Apply the 'Outfit' font to all elements */
+* {
     font-family: Outfit;
 }
 
-::-webkit-scrollbar{
-    @apply hidden
+/* Hide the default scrollbar for a cleaner UI look */
+::-webkit-scrollbar {
+    @apply hidden;
 }
