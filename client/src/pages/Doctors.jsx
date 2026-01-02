@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
+import Loading from '../components/Loading';
 
 const Doctors = () => {
     // Get the 'specialty' parameter from the URL
@@ -40,9 +41,8 @@ const Doctors = () => {
 
             {/* Mobile filter toggle button */}
             <button
-                className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${
-                    showFilter ? 'bg-primary text-white' : ''
-                }`}
+                className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter ? 'bg-primary text-white' : ''
+                    }`}
                 onClick={() => {
                     setShowFilter((prev) => !prev);
                 }}
@@ -54,9 +54,8 @@ const Doctors = () => {
             <div className='flex flex-col sm:flex-row items-start gap-5 mt-5'>
                 {/* Filter section (visible on mobile when toggled) */}
                 <div
-                    className={`flex flex-col gap-4 text-sm text-gray-600 ${
-                        showFilter ? 'flex' : 'hidden sm:flex'
-                    }`}
+                    className={`flex flex-col gap-4 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex'
+                        }`}
                 >
                     {/* Specialty filter buttons */}
                     <p
@@ -65,11 +64,10 @@ const Doctors = () => {
                                 ? navigate('/doctors')
                                 : navigate('/doctors/General physician')
                         }
-                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-                            specialty === 'General physician'
+                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${specialty === 'General physician'
                                 ? 'bg-indigo-100 text-black'
                                 : ''
-                        }`}
+                            }`}
                     >
                         General physician
                     </p>
@@ -80,11 +78,10 @@ const Doctors = () => {
                                 ? navigate('/doctors')
                                 : navigate('/doctors/Gynecologist')
                         }
-                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-                            specialty === 'Gynecologist'
+                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${specialty === 'Gynecologist'
                                 ? 'bg-indigo-100 text-black'
                                 : ''
-                        }`}
+                            }`}
                     >
                         Gynecologist
                     </p>
@@ -95,11 +92,10 @@ const Doctors = () => {
                                 ? navigate('/doctors')
                                 : navigate('/doctors/Dermatology')
                         }
-                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-                            specialty === 'Dermatologist'
+                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${specialty === 'Dermatologist'
                                 ? 'bg-indigo-100 text-black'
                                 : ''
-                        }`}
+                            }`}
                     >
                         Dermatologist
                     </p>
@@ -110,11 +106,10 @@ const Doctors = () => {
                                 ? navigate('/doctors')
                                 : navigate('/doctors/Pediatricians')
                         }
-                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-                            specialty === 'Pediatricians'
+                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${specialty === 'Pediatricians'
                                 ? 'bg-indigo-100 text-black'
                                 : ''
-                        }`}
+                            }`}
                     >
                         Pediatricians
                     </p>
@@ -125,11 +120,10 @@ const Doctors = () => {
                                 ? navigate('/doctors')
                                 : navigate('/doctors/Neurologist')
                         }
-                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-                            specialty === 'Neurologist'
+                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${specialty === 'Neurologist'
                                 ? 'bg-indigo-100 text-black'
                                 : ''
-                        }`}
+                            }`}
                     >
                         Neurologist
                     </p>
@@ -140,62 +134,68 @@ const Doctors = () => {
                                 ? navigate('/doctors')
                                 : navigate('/doctors/Gastroenterologist')
                         }
-                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
-                            specialty === 'Gastroenterologist'
+                        className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${specialty === 'Gastroenterologist'
                                 ? 'bg-indigo-100 text-black'
                                 : ''
-                        }`}
+                            }`}
                     >
                         Gastroenterologist
                     </p>
                 </div>
 
-                {/* Doctors listing section */}
-                <div className='w-full grid grid-cols-auto gap-4 gap-y-6'>
-                    {filterDoc.map((item, index) => (
-                        <div
-                            onClick={() => {
-                                navigate(`/appointment/${item._id}`);
-                            }}
-                            className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'
-                            key={index}
-                        >
-                            {/* Doctor image */}
-                            <img className='bg-blue-50' src={item.image} alt="doctor" />
-
-                            {/* Doctor details */}
-                            <div className='p-4'>
+                {doctors.length !== 0 ? (
+                    <>
+                        {/* Doctors listing section */}
+                        <div className='w-full grid grid-cols-auto gap-4 gap-y-6'>
+                            {filterDoc.map((item, index) => (
                                 <div
-                                    className={`flex items-center gap-2 text-sm text-center ${
-                                        item.available
-                                            ? 'text-green-500'
-                                            : 'text-gray-500'
-                                    }`}
+                                    onClick={() => {
+                                        navigate(`/appointment/${item._id}`);
+                                    }}
+                                    className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'
+                                    key={index}
                                 >
-                                    <p
-                                        className={`w-2 h-2 ${
-                                            item.available
-                                                ? 'bg-green-500'
-                                                : 'bg-gray-500'
-                                        } rounded-full`}
-                                    ></p>
-                                    <p>
-                                        {item.available
-                                            ? 'Available'
-                                            : 'Not Available'}
-                                    </p>
-                                </div>
+                                    {/* Doctor image */}
+                                    <img className='bg-blue-50' src={item.image} alt="doctor" />
 
-                                <p className='text-gray-900 text-lg font-medium'>
-                                    {item.name}
-                                </p>
-                                <p className='text-gray-600 text-sm'>
-                                    {item.speciality}
-                                </p>
-                            </div>
+                                    {/* Doctor details */}
+                                    <div className='p-4'>
+                                        <div
+                                            className={`flex items-center gap-2 text-sm text-center ${item.available
+                                                    ? 'text-green-500'
+                                                    : 'text-gray-500'
+                                                }`}
+                                        >
+                                            <p
+                                                className={`w-2 h-2 ${item.available
+                                                        ? 'bg-green-500'
+                                                        : 'bg-gray-500'
+                                                    } rounded-full`}
+                                            ></p>
+                                            <p>
+                                                {item.available
+                                                    ? 'Available'
+                                                    : 'Not Available'}
+                                            </p>
+                                        </div>
+
+                                        <p className='text-gray-900 text-lg font-medium'>
+                                            {item.name}
+                                        </p>
+                                        <p className='text-gray-600 text-sm'>
+                                            {item.speciality}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </>
+                ) : (
+                    <div className='w-full flex justify-center items-center'>
+                        <Loading text="Loading all doctors..." />
+                    </div>
+                )}
+
             </div>
         </div>
     );
