@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useEffect } from "react";
-import axios from 'axios';
+import api from "../../utils/axios";
 import { toast } from 'react-toastify';
 
 // Create a new context for global state management
@@ -23,7 +25,7 @@ const AppContextProvider = (props) => {
      */
     const getDoctorsData = async () => {
         try {
-            const { data } = await axios.get(`${backendUrl}/api/doctor/list`);
+            const { data } = await api.get(`${backendUrl}/api/doctor/list`);
             
             if (data.success) {
                 setDoctors(data.doctors); // Update state with doctors list
@@ -41,7 +43,7 @@ const AppContextProvider = (props) => {
      */
     const loadUserProfileData = async () => {
         try {
-            const { data } = await axios.get(
+            const { data } = await api.get(
                 `${backendUrl}/api/user/get-profile`,
                 { headers: { token } }
             );
