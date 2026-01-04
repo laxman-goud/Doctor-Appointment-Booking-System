@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
-import axios from 'axios'
+import api from '../../utils/axios'
 import { useNavigate } from 'react-router-dom'
 
 const MyAppointments = () => {
@@ -25,7 +26,7 @@ const MyAppointments = () => {
     // Fetch all appointments for the logged-in user
     const getUserAppointments = async () => {
         try {
-            const { data } = await axios.get(`${backendUrl}/api/user/appointments`, { headers: { token } })
+            const { data } = await api.get(`${backendUrl}/api/user/appointments`, { headers: { token } })
             if (data.success) {
                 // Reverse for latest-first ordering
                 setAppointments(data.appointments.reverse())
@@ -40,7 +41,7 @@ const MyAppointments = () => {
     // Cancel an existing appointment
     const cancelAppointment = async (appointmentId) => {
         try {
-            const { data } = await axios.post(`${backendUrl}/api/user/cancel-appointment`, { appointmentId }, { headers: { token } })
+            const { data } = await api.post(`${backendUrl}/api/user/cancel-appointment`, { appointmentId }, { headers: { token } })
             if (data.success) {
                 toast.success(data.message)
                 getUserAppointments()  // Refresh user appointments
@@ -66,7 +67,7 @@ const MyAppointments = () => {
             receipt: order.receipt,
             handler: async (response) => {
                 try {
-                    const { data } = await axios.post(`${backendUrl}/api/user/verify-razorpay`, response, { headers: { token } })
+                    const { data } = await api.post(`${backendUrl}/api/user/verify-razorpay`, response, { headers: { token } })
                     if (data.success) {
                         getUserAppointments()
                         navigate('/my-appointments')
@@ -85,7 +86,7 @@ const MyAppointments = () => {
     // Create Razorpay order and start payment process
     const appointmentRazorpay = async (appointmentId) => {
         try {
-            const { data } = await axios.post(`${backendUrl}/api/user/payment-razorpay`, { appointmentId }, { headers: { token } })
+            const { data } = await api.post(`${backendUrl}/api/user/payment-razorpay`, { appointmentId }, { headers: { token } })
             if (data.success) {
                 toast.success(data.message)
                 initPay(data.order)

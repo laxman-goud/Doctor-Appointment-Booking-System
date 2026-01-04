@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
-import axios from 'axios'
+import api from '../../utils/axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
@@ -24,7 +25,7 @@ const Login = () => {
         try {
             if (state === 'Sign Up') {
                 // API call for user registration
-                const { data } = await axios.post(`${backendUrl}/api/user/register`, { name, email, password })
+                const { data } = await api.post(`${backendUrl}/api/user/register`, { name, email, password })
 
                 if (data.success) {
                     localStorage.setItem('token', data.token)
@@ -35,7 +36,7 @@ const Login = () => {
                 }
             } else {
                 // API call for user login
-                const { data } = await axios.post(`${backendUrl}/api/user/login`, { email, password })
+                const { data } = await api.post(`${backendUrl}/api/user/login`, { email, password })
 
                 if (data.success) {
                     localStorage.setItem('token', data.token)
