@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Import necessary dependencies
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -5,7 +6,7 @@ import { AppContext } from '../context/AppContext';
 import { assets } from '../assets/assets';
 import RelatedDoctors from '../components/RelatedDoctors';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import api from '../../utils/axios';
 
 const Appointment = () => {
     // Extract doctor ID from URL
@@ -119,7 +120,7 @@ const Appointment = () => {
             const slotDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
 
             // Send booking request to backend
-            const { data } = await axios.post(
+            const { data } = await api.post(
                 `${backendUrl}/api/user/book-appointment`,
                 { docId, slotDate, slotTime },
                 { headers: { token } }
