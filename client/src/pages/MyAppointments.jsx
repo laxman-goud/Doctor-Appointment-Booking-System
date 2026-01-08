@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
-import api from '../../utils/axios'
+import api from '../utils/axios'
 import { useNavigate } from 'react-router-dom'
 
 const MyAppointments = () => {

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
-import api from '../../utils/axios'
+import api from '../utils/axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
