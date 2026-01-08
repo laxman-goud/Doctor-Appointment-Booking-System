@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useEffect } from "react";
-import api from "../../utils/axios";
+import api from "../utils/axios";
 import { toast } from 'react-toastify';
 
 // Create a new context for global state management
