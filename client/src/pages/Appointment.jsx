@@ -6,7 +6,7 @@ import { AppContext } from '../context/AppContext';
 import { assets } from '../assets/assets';
 import RelatedDoctors from '../components/RelatedDoctors';
 import { toast } from 'react-toastify';
-import api from '../../utils/axios';
+import api from '../utils/axios';
 
 const Appointment = () => {
     // Extract doctor ID from URL
