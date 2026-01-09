@@ -1,9 +1,8 @@
 // Importing necessary modules and hooks
 import React, { useState } from 'react'
-import { assets } from '../assets/assets' // Static assets (e.g., icons, images)
 import { AdminContext } from '../context/AdminContext.jsx' // Context for admin authentication
 import { useContext } from 'react'
-import axios from 'axios' // For API requests
+import api from '../utils/axios.js'  // For API requests
 import { toast } from 'react-toastify' // For notifications
 import { DoctorContext } from '../context/DoctorContext.jsx' // Context for doctor authentication
 
@@ -27,7 +26,7 @@ const Login = () => {
         try {
             if (state === 'Admin') {
                 // Admin login request
-                const { data } = await axios.post(`${backendUrl}/api/admin/login`, { email, password })
+                const { data } = await api.post(`${backendUrl}/api/admin/login`, { email, password })
                 
                 // If login successful, store token and set context
                 if (data.success) {
@@ -38,7 +37,7 @@ const Login = () => {
                 }
             } else {
                 // Doctor login request
-                const { data } = await axios.post(`${backendUrl}/api/doctor/login`, { email, password })
+                const { data } = await api.post(`${backendUrl}/api/doctor/login`, { email, password })
                 
                 if (data.success) {
                     localStorage.setItem('dToken', data.token)
