@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { assets } from '../../assets/assets'
 import { AdminContext } from '../../context/AdminContext';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import api from '../../utils/axios';
 
 const AddDoctor = () => {
 
@@ -46,7 +46,7 @@ const AddDoctor = () => {
             formData.append('about', about);
 
             // API request to backend to add doctor
-            const { data } = await axios.post(`${backendUrl}/api/admin/add-doctor`, formData, {
+            const { data } = await api.post(`${backendUrl}/api/admin/add-doctor`, formData, {
                 headers: {token: aToken}
             });
 
