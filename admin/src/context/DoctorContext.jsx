@@ -1,6 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 // Context for managing Doctor-related state and API operations
 import { createContext, useState } from "react";
-import axios from 'axios';
+import api from "../utils/axios";
 import { toast } from 'react-toastify';
 
 export const DoctorContext = createContext();
@@ -16,7 +17,7 @@ const DoctorContextProvider = (props) => {
     // Fetch all appointments for the doctor
     const getAppointments = async () => {
         try {
-            const { data } = await axios.get(`${backendUrl}/api/doctor/appointments`, { headers: { dtoken: dToken } });
+            const { data } = await api.get(`${backendUrl}/api/doctor/appointments`, { headers: { dtoken: dToken } });
             data.success ? setAppointments(data.appointments) : toast.error(data.message);
         } catch (error) { toast.error(error.message); }
     };
@@ -24,7 +25,7 @@ const DoctorContextProvider = (props) => {
     // Mark appointment as completed
     const completeAppointment = async (appointmentId) => {
         try {
-            const { data } = await axios.post(`${backendUrl}/api/doctor/complete-appointment`, { appointmentId }, { headers: { dtoken: dToken } });
+            const { data } = await api.post(`${backendUrl}/api/doctor/complete-appointment`, { appointmentId }, { headers: { dtoken: dToken } });
             data.success ? (toast.success(data.message), getAppointments()) : toast.error(data.message);
         } catch (error) { toast.error(error.message); }
     };
@@ -32,7 +33,7 @@ const DoctorContextProvider = (props) => {
     // Cancel an appointment
     const cancelAppointment = async (appointmentId) => {
         try {
-            const { data } = await axios.post(`${backendUrl}/api/doctor/cancel-appointment`, { appointmentId }, { headers: { dtoken: dToken } });
+            const { data } = await api.post(`${backendUrl}/api/doctor/cancel-appointment`, { appointmentId }, { headers: { dtoken: dToken } });
             data.success ? (toast.success(data.message), getAppointments()) : toast.error(data.message);
         } catch (error) { toast.error(error.message); }
     };
@@ -40,7 +41,7 @@ const DoctorContextProvider = (props) => {
     // Fetch doctor dashboard data
     const getDashData = async () => {
         try {
-            const { data } = await axios.get(`${backendUrl}/api/doctor/dashboard`, { headers: { dtoken: dToken } });
+            const { data } = await api.get(`${backendUrl}/api/doctor/dashboard`, { headers: { dtoken: dToken } });
             data.success ? setDashData(data.dashData) : toast.error(data.message);
         } catch (error) { toast.error(error.message); }
     };
@@ -48,7 +49,7 @@ const DoctorContextProvider = (props) => {
     // Fetch doctor profile data
     const getProfileData = async () => {
         try {
-            const { data } = await axios.get(`${backendUrl}/api/doctor/profile`, { headers: { dtoken: dToken } });
+            const { data } = await api.get(`${backendUrl}/api/doctor/profile`, { headers: { dtoken: dToken } });
             data.success ? setProfileData(data.profileData) : toast.error(data.message);
         } catch (error) { toast.error(error.message); }
     };
