@@ -48,8 +48,11 @@ const App = () => {
 
         {/* Route definitions for both Admin and Doctor panels */}
         <Routes>
+          <Route
+            path="/"
+            element={aToken ? <Dashboard /> : <DoctorDashboard />}
+          />
           {/* --- Admin Routes --- */}
-          <Route path='/' element={<Dashboard />} />
           <Route path='/admin-dashboard' element={<Dashboard />} />
           <Route path='/all-appointments' element={<AllAppointments />} />
           <Route path='/add-doctor' element={<AddDoctor />} />
