@@ -32,7 +32,7 @@ const calculateAge = (dob) => {
     if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
         age--;
     }
-A
+    
     return age;
 };
 
