@@ -44,7 +44,7 @@ const Footer = () => {
             <div>
                 <hr />
                 <p className='py-5 text-sm text-center'>
-                    Copyright © 2026 <a href="https://laxman-thedev.vercel.app" className='underline' >Laxman</a> - All Right Reserved.
+                    Copyright © 2026 <a href={import.meta.env.VITE_AUTHOR_CONTACT} className='underline' >Laxman</a> - All Right Reserved.
                 </p>
             </div>
         </div>
