@@ -71,7 +71,7 @@ const DoctorProfile = () => {
                         Appointment fees: <span className='text-gray-800'>
                             {currency}
                             {isEdit ? (
-                                <input type="number" onChange={(e) => setProfileData(prev => ({ ...prev, fees: e.target.value }))} value={profileData.fees} />
+                                <input className='bg-gray-200 pl-1' type="number" onChange={(e) => setProfileData(prev => ({ ...prev, fees: e.target.value }))} value={profileData.fees} />
                             ) : profileData.fees}
                         </span>
                     </p>
@@ -81,11 +81,11 @@ const DoctorProfile = () => {
                         <p>Address:</p>
                         <p className='text-sm'>
                             {isEdit ? (
-                                <input type="text" onChange={(e) => setProfileData(prev => ({ ...prev, address: { ...prev.address, line1: e.target.value } }))} value={profileData.address.line1} />
+                                <input className='bg-gray-200 pl-1' type="text" onChange={(e) => setProfileData(prev => ({ ...prev, address: { ...prev.address, line1: e.target.value } }))} value={profileData.address.line1} />
                             ) : profileData.address.line1}
                             <br />
                             {isEdit ? (
-                                <input type="text" onChange={(e) => setProfileData(prev => ({ ...prev, address: { ...prev.address, line2: e.target.value } }))} value={profileData.address.line2} />
+                                <input className='bg-gray-200 pl-1' type="text" onChange={(e) => setProfileData(prev => ({ ...prev, address: { ...prev.address, line2: e.target.value } }))} value={profileData.address.line2} />
                             ) : profileData.address.line2}
                         </p>
                     </div>
