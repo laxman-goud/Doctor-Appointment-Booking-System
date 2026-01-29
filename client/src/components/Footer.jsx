@@ -13,10 +13,11 @@ const Footer = () => {
                 <div>
                     <img className='mb-5 w-40' src={assets.logo} alt="logo" />
                     <p className='w-full md:w-2/3 text-gray-600 leading-6'>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        MediBook is a doctor appointment booking platform that helps patients easily find doctors,
+                        book appointments, and manage healthcare schedules online. It also provides dedicated
+                        dashboards for admins and doctors to manage appointments efficiently.
                     </p>
+
                 </div>
 
                 {/* Center Section – Company navigation links */}
@@ -39,7 +40,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            
+
             {/* Copyright Text */}
             <div>
                 <hr />
