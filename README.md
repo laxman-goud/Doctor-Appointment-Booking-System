@@ -10,6 +10,7 @@ MediBook is a web application designed to simplify the process of booking and ma
 - **Admin Panel**: A dedicated panel for administrators to manage doctors, patients, and all appointments
 - **Doctor Panel**: A dedicated panel for doctors to manage their own appointments and profile details
 - **Payment Integration**: Secure online payment options for booking appointments
+- **AI-Powered Doctor Bio Generation**: Admins can automatically generate professional doctor bios using AI based on name, specialty, education, and experience
 
 ## 📁 Project Structure
 
@@ -37,6 +38,7 @@ medibook/
 - **jsonwebtoken**: JSON Web Token implementation for authentication
 - **bcrypt**: A library to help hash passwords
 - **Razorpay**: Payment gateway integration
+- **Google Gemini AI**: AI-powered doctor bio generation for admin panel
 
 ## 🚀 Getting Started
 
