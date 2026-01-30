@@ -3,8 +3,9 @@ import bcrypt from 'bcrypt';
 import { v2 as cloudinary } from 'cloudinary';
 import doctorModel from '../models/doctorModel.js';
 import jwt from 'jsonwebtoken';
-import appointmentModel from '../models/appointmentModel.js'; 
+import appointmentModel from '../models/appointmentModel.js';
 import userModel from '../models/userModel.js';
+import main from '../config/gemini.js';
 
 // API for adding a doctor
 const addDoctor = async (req, res) => {
@@ -62,7 +63,7 @@ const adminLogin = async (req, res) => {
 
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
             const token = jwt.sign(
-                { email }, 
+                { email },
                 process.env.JWT_SECRET,
                 { expiresIn: "10d" }
             );
@@ -88,10 +89,10 @@ const adminLogin = async (req, res) => {
 // API to get all doctors list
 const allDoctors = async (req, res) => {
     try {
-        
+
         const doctors = await doctorModel.find({}).select("-password");
-        res.json({ doctors, success: true, doctors }); 
-        
+        res.json({ doctors, success: true, doctors });
+
     } catch (error) {
         res.json({ message: "Internal server error.", success: false });
     }
@@ -112,11 +113,10 @@ const appointmentCancel = async (req, res) => {
     try {
         const { appointmentId } = req.body;
         const appointmentData = await appointmentModel.findById(appointmentId);
-        
 
         await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
 
-        const { docId, slotDate, slotTime } = appointmentData; 
+        const { docId, slotDate, slotTime } = appointmentData;
         const doctorData = await doctorModel.findById(docId).select('-password');
         let slots_booked = doctorData.slots_booked;
 
@@ -137,7 +137,7 @@ const adminDashboard = async (req, res) => {
         const users = await userModel.find({}).select('-password');
         const appointments = await appointmentModel.find({});
 
-        const dashData ={
+        const dashData = {
             doctors: doctors.length,
             appointments: appointments.length,
             patients: users.length,
@@ -152,4 +152,36 @@ const adminDashboard = async (req, res) => {
     }
 }
 
-export { addDoctor, adminLogin, allDoctors, appointmentsAdmin, appointmentCancel, adminDashboard };
+// API to generate doctor bio using AI
+const generateDoctorBio = async (req, res) => {
+
+    try {
+        const { name, speciality, experience, education } = req.body;
+
+        const prompt = `
+            Write a professional doctor bio in exactly 1 line.
+
+            Rules:
+            - Do not add headings, options, or explanations
+            - Keep it concise and patient-friendly
+            - Output only the bio text
+
+            Details:
+            Name: ${name}
+            Speciality: ${speciality}
+            Experience: ${experience}
+            Education: ${education}
+            `;
+
+        const content = await main(
+            prompt
+        )
+
+        res.json({ success: true, content })
+    } catch (error) {
+        res.json({ success: false, message: error.message })
+    }
+
+}
+
+export { addDoctor, adminLogin, allDoctors, appointmentsAdmin, appointmentCancel, adminDashboard, generateDoctorBio };
