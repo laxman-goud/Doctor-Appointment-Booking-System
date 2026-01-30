@@ -9,9 +9,9 @@ const ai = new GoogleGenAI({
 })
 
 /**
- * Generates AI content for blog writing
- * @param {string} prompt - Blog title or topic
- * @returns {string} Generated blog content
+ * Generates AI content for doctor bio
+ * @param {string} prompt - Doctor bio prompt
+ * @returns {string} Generated doctor bio
  */
 async function main(prompt) {
     const response = await ai.models.generateContent({
