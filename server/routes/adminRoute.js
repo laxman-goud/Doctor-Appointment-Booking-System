@@ -6,7 +6,8 @@ import {
   adminLogin, 
   allDoctors, 
   appointmentCancel, 
-  appointmentsAdmin 
+  appointmentsAdmin,
+  generateDoctorBio
 } from "../controllers/adminController.js"
 import upload from "../middlewares/multer.js"        // Middleware for handling image uploads
 import authAdmin from "../middlewares/authAdmin.js"  // Middleware for admin authentication
@@ -35,6 +36,9 @@ adminRouter.post("/cancel-appointment", authAdmin, appointmentCancel)
 
 // Get overall admin dashboard statistics (requires authentication)
 adminRouter.get("/dashboard", authAdmin, adminDashboard)
+
+// Generate doctor bio using AI
+adminRouter.post("/generate-doctor-bio", authAdmin, generateDoctorBio);
 
 // Export router for use in main server file
 export default adminRouter
