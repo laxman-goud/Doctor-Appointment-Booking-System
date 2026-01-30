@@ -24,6 +24,7 @@ This is the backend server for the MediBook Doctor Appointment Booking System. I
 - **cors**: Middleware to enable Cross-Origin Resource Sharing
 - **dotenv**: To load environment variables from a `.env` file
 - **Razorpay**: Payment gateway SDK for processing online payments
+- **Google Gemini AI**: AI-powered doctor bio generation for admin panel
 
 ## 🚀 Installation and Setup
 
