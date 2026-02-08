@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Importing all the page components
@@ -18,6 +17,8 @@ import Footer from './components/Footer';
 // Importing toast notification setup
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
@@ -59,6 +60,9 @@ const App = () => {
 
         {/* Appointment booking page (dynamic doctor ID route) */}
         <Route path='/appointment/:docId' element={<Appointment />} />
+
+        {/* Catch-all route for undefined paths, showing a 404 Not Found page */}
+        <Route path='*' element={<NotFound />} />
 
       </Routes>
 
