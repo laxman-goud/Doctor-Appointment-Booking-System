@@ -26,6 +26,7 @@ import DoctorsList from './pages/Admin/DoctorsList.jsx'
 import DoctorDashboard from './pages/Doctor/DoctorDashboard.jsx'
 import DoctorProfile from './pages/Doctor/DoctorProfile.jsx'
 import DoctorAppointments from './pages/Doctor/DoctorAppointments.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 const App = () => {
 
@@ -62,6 +63,9 @@ const App = () => {
           <Route path='/doctor-dashboard' element={<DoctorDashboard />} />
           <Route path='/doctor-appointments' element={<DoctorAppointments />} />
           <Route path='/doctor-profile' element={<DoctorProfile />} />
+
+          {/* 404 Route */}
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
     </div>
