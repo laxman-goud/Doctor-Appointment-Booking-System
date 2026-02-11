@@ -16,3 +16,15 @@ createRoot(document.getElementById('root')).render(
     </AppContextProvider>
   </BrowserRouter>
 )
+
+// Register Service Worker (PWA)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      await navigator.serviceWorker.register("/sw.js");
+      console.log("Service Worker registered");
+    } catch (err) {
+      console.log("Service Worker registration failed:", err);
+    }
+  });
+}
